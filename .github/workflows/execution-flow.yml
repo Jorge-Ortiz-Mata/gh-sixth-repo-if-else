@@ -22,6 +22,7 @@ jobs:
 
       - name: Lint code
         run: npm run lint
+
   test:
     runs-on: ubuntu-latest
     steps:
@@ -39,13 +40,16 @@ jobs:
         run: npm ci
 
       - name: Test code
+        id: test-code-id
         run: npm run test
 
       - name: Upload test report
+        if: steps.test-code-id.outcome == 'failure'
         uses: actions/upload-artifact@v3
         with:
           name: test-report
           path: test.json
+
   build:
     needs: test
     runs-on: ubuntu-latest
@@ -72,6 +76,7 @@ jobs:
         with:
           name: dist-files
           path: dist
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
