@@ -21,5 +21,10 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
+      - name: Test code
+        continue-on-error: true
+        id: test-code-id
+        run: npm run test
+
       - name: Build Project
         run: npm run build
