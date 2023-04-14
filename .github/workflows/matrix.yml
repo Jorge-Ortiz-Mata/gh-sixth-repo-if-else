@@ -10,10 +10,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Get code
-        run: actions/checkout@v3
+        uses: actions/checkout@v3
 
       - name: Install Node
-        run: actions/setup-node@v3
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
 
