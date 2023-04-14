@@ -9,6 +9,7 @@ on:
         type: string
     outputs:
       result:
+        value: ${{ jobs.deploy.outputs.result-output }}
 
 
 jobs:
@@ -33,4 +34,4 @@ jobs:
 
       - name: "Getting result"
         id: set-result-id
-        run: echo "my-result=Everything_works_fine" >> $GITHUB_OUTPUT
+        run: echo "my-result=success" >> $GITHUB_OUTPUT
