@@ -83,6 +83,8 @@ jobs:
   deploy:
     needs: build
     uses: ./.github/workflows/reusable.yml
+    with:
+      my-variable: dist-files
 
   report:
     needs: [deploy, lint]

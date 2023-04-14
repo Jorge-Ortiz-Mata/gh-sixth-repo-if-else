@@ -1,5 +1,13 @@
 name: Reusable Deploy
-on: workflow_call # It is call from execution-flow.
+on:
+  workflow_call: # It is call from execution-flow.
+    inputs:
+      my-variable:
+        description: Variable from other workflow
+        required: false
+        default: dist
+        type: string
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -7,9 +15,9 @@ jobs:
       - name: Get build artifacts
         uses: actions/download-artifact@v3
         with:
-          name: dist-files
+          name: ${{ inputs.my-variable }}
 
-      - name: Output contents
+      - name: List files
         run: ls
 
       - name: Deploy
