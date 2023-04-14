@@ -7,9 +7,14 @@ on:
         required: false
         default: dist
         type: string
+    outputs:
+      result:
+
 
 jobs:
   deploy:
+    outputs:
+      result-output: ${{ steps.set-result-id.outputs.my-result }}
     runs-on: ubuntu-latest
     steps:
       - name: Get build artifacts
@@ -25,3 +30,7 @@ jobs:
 
       - name: Output Information
         run: echo "Deploying..."
+
+      - name: "Getting result"
+        id: set-result-id
+        run: echo "my-result=Everything_works_fine" >> $GITHUB_OUTPUT

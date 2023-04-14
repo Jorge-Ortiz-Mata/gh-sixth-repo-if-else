@@ -86,6 +86,13 @@ jobs:
     with:
       my-variable: dist-files
 
+  print-deploy-result:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Deploy Output
+        run: echo ${{ need.deploy.outputs.result }}
+
   report:
     needs: [deploy, lint]
     if: failure()
